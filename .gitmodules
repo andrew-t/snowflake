@@ -1,0 +1,3 @@
+[submodule "sidepanel"]
+	path = sidepanel
+	url = http://github.com/andrew-t/sidepanel

@@ -2,8 +2,11 @@ var overallSize = 100;
 
 var lineSegment = [point(0,0.3333), point(-0.2887,0.5), point(0,0.6667)];
 var underlyingShapeSides = 3;
-var highIterationCount = 4;
-var lowIterationCount  = 2;
+
+var settings = {
+    highIterationCount: 4,
+    lowIterationCount:  2
+};
 
 var lineSegmentCanvas,  underlyingShapeCanvas,  outputCanvas;
 var lineSegmentContext, underlyingShapeContext, outputContext;
@@ -89,20 +92,13 @@ function init() {
         updatePolygon();
         updateOutput(true);
     }).contextmenu(function (e) {
-        if (underlyingShapeSides > 3){
+        if (underlyingShapeSides > 3) {
             --underlyingShapeSides;
             updatePolygon();
             updateOutput(true);
         } return false;
     });
-    $('input').change(function() {
-        var c = $(this).val();
-        if ($.isNumeric(c))
-            eval($(this).attr('id') +  ' = parseFloat(c);');
-        else
-            $(this).val(eval($(this).attr('id')));
-    });
-    $('input').change();
+    $('#save').click(function(e) { if ($(document.body).hasClass('menu')) e.preventDefault(); });
 }
 
 function updateSegment() {
@@ -121,7 +117,7 @@ function updatePolygon() {
 function updateOutput (good) { 
     clearCanvas(outputContext);
     outputContext.fillStyle          = 'blue';
-    drawPath(polygon(overallSize, underlyingShapeSides), outputContext,          outputCanvas,          true,  lineSegment, good ? highIterationCount : lowIterationCount);
+    drawPath(polygon(overallSize, underlyingShapeSides), outputContext,          outputCanvas,          true,  lineSegment, good ? settings.highIterationCount : settings.lowIterationCount);
     $('#save').attr('href', outputCanvas.toDataURL());
 }
 var someHugeNumber = -overallSize * 100, twiceThatNumber = overallSize * 200;
@@ -206,13 +202,4 @@ function inverseTform(tform, p) {
     p.x = (p.x - tform.xOffset) / tform.scale;
     p.y = (p.y - tform.yOffset) / tform.scale;
     return p;
-}
-
-function activate(panel) {
-    if ($('.shown').attr('id') == panel)
-        $('#' + panel).removeClass('shown').addClass('hidden');
-    else {
-        $('.shown').removeClass('shown').addClass('hidden');
-        $('#' + panel).removeClass('hidden').addClass('shown');
-    }
 }

@@ -2,10 +2,13 @@
 <html><head>
     <title>andrewt.net / snowflake</title>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="sidepanel/sidepanel.css" />
+    <script src="sidepanel/sidepanel.js"></script>
     <link rel="stylesheet" type="text/css" href="fractal.css" />
     <script src="fractal.js"></script>
     <meta http-equiv="X-UA-Compatible" content="IE=9;" />
 </head><body onLoad="init();">
+  <div id="body">
     <div id="leftpanel">
         <div id="line-segment">
             <canvas></canvas>
@@ -15,18 +18,19 @@
         </div>
     </div>
     <a href="#" target="_blank" id="save" title="Click to save your creation"><canvas id="output"></canvas></a>
-      <div id="controls">
-    <a href="javascript:activate('settings')">Settings</a> |
-    <a href="javascript:activate('help')">Help</a> |
-    <a href="javascript:activate('maths')">Maths</a> |
-    <a href="javascript:activate('none')">Close all</a>
-    <div id="settings" class="hidden"><p><form>
+    <a id="menu"></a>
+  </div>
+  <div id="controls">
+    <div id="tabs">
+      <a href="#" data-id="settings">Settings</a><a href="#" data-id="help">Help</a><a href="#" data-id="maths">Maths</a>
+    </div>
+    <form id="settings" class="hidden">
       <label for="lowIterationCount">Dragging <abbr title="iterations">it&rsquo;ns</abbr>:</label>
       <input type="text" id="lowIterationCount" name="lowIterationCount"><br>
       <label for="highIterationCount">Drawing <abbr title="iterations">it&rsquo;ns</abbr>:</label>
       <input type="text" id="highIterationCount" name="highIterationCount"><br>
       <a href="javascript:updateOutput(true)">Recalculate</a>
-    </form></p></div>
+    </form>
     <div id="help" class="hidden">
       <p>Move the cursor over the line in the top left. When you're over a corner, it will be highlighted and you can drag it with the left button or delete it with the right. If you're over the half-way point. If you're halfway between two points, a green circle will appear meaning you can click to add a new point. Hold down the button and you'll be dragging it.</p>
       <p>Left and right click the shape in the bottom-left to change the underlying polygon.</p>
