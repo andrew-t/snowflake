@@ -115,6 +115,7 @@ document.addEventListener('DOMContentLoaded', function() {
     lineSegmentContext     = lineSegmentCanvas    .getContext('2d');
     underlyingShapeContext = underlyingShapeCanvas.getContext('2d');
     outputContext          = outputCanvas         .getContext('2d');
+    
     var h;
     window.addEventListener('resize', h = function() {
         var canvasses = document.getElementsByTagName('canvas');
@@ -129,6 +130,7 @@ document.addEventListener('DOMContentLoaded', function() {
         updatePolygon();
         updateOutput(true);
     }); h();
+
     lineSegmentCanvas.addEventListener('mousemove', function(e) {
         var cursor = findCursor(e);
         if (draggingPoint >= 0) {
@@ -185,6 +187,7 @@ document.addEventListener('DOMContentLoaded', function() {
         draggingPoint = -1;
         updateOutput(true);
     });
+
     underlyingShapeCanvas.addEventListener('click', function (e) {
         if (e.which != 1) return;
         ++underlyingShapeSides;
@@ -198,9 +201,6 @@ document.addEventListener('DOMContentLoaded', function() {
             updateOutput(true);
         } return false;
     });
-    document.getElementById('save').addEventListener('click', function(e) { 
-        if (document.body.classList.contains('menu')) 
-            e.preventDefault(); 
-    });
+
     document.getElementById('recalculate').addEventListener('click', function() { updateOutput(true); })
 });
